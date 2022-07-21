@@ -12,6 +12,7 @@ const Icon = ({ as, color, link }: Props) => {
 		<a
 			id="tweet-quote"
 			target="_blank"
+			rel="noopener noreferrer"
 			href={link}
 			className={styles.wrapper}
 			style={{ backgroundColor: color }}

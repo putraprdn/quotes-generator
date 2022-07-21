@@ -6,7 +6,7 @@ const Footer = () => {
 	return (
 		<footer className={styles.footer}>
 			Crafted with 🤍 by
-			<a className={styles.link} href="https://github.com/putraprdn" target="_blank">
+			<a className={styles.link} href="https://github.com/putraprdn" target="_blank" rel="noopener noreferrer">
 				<RiGithubFill />
 			</a>
 		</footer>
