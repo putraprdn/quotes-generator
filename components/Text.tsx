@@ -5,15 +5,13 @@ import { BsDash } from "react-icons/bs";
 
 type Props = {
 	quotes: {
-		text: string;
+		content: string;
 		author: string;
 	};
 	color: string;
 };
 
 const Text = ({ quotes, color }: Props) => {
-	console.log(color);
-
 	return (
 		<div className={styles.quoteWrapper}>
 			<h3 id="text" className={styles.quote} style={{ color: color }}>
@@ -23,13 +21,13 @@ const Text = ({ quotes, color }: Props) => {
 						style={{ marginBottom: "10px" }}
 					/>
 				</span>
-				{quotes.text}
+				{quotes.content}
 			</h3>
-			<p id="author" className={styles.author}style={{ color: color }}>
+			<p id="author" className={styles.author} style={{ color: color }}>
 				<span>
 					<BsDash />
 				</span>
-				{quotes?.author || 'Some cool dude'}
+				{quotes?.author || "Some cool dude"}
 			</p>
 		</div>
 	);

@@ -1,3 +1,4 @@
+import Router from "next/router";
 import { useState } from "react";
 import { BsTwitter } from "react-icons/bs";
 import { GrTumblr } from "react-icons/gr";
@@ -7,15 +8,15 @@ import Text from "./Text";
 
 type Props = {
 	quotes: {
-		text: string;
+		content: string;
 		author: string;
-	}[];
+	};
 };
 
 const Card = ({ quotes }: Props) => {
 	const [newQuotes, setNewQuotes] = useState({
-		text: "You need some quotes? You must be depressed af lol",
-		author: "jk, stay slay 💅🏻",
+		content: quotes.content,
+		author: quotes.author,
 	});
 	const [color, setColor] = useState("#16a085");
 
@@ -23,11 +24,11 @@ const Card = ({ quotes }: Props) => {
 		"https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes,freecodecamp&caption=" +
 		encodeURIComponent(newQuotes.author) +
 		"&content=" +
-		encodeURIComponent(newQuotes.text) +
+		encodeURIComponent(newQuotes.content) +
 		"&canonicalUrl=https%3A%2F%2Fwww.tumblr.com%2Fbuttons&shareSource=tumblr_share_button";
 	const twitterLink =
 		"https://twitter.com/intent/tweet?hashtags=quotes&text=" +
-		encodeURIComponent('"' + newQuotes.text + '" ' + newQuotes.author);
+		encodeURIComponent('"' + newQuotes.content + '" ' + newQuotes.author);
 
 	const colors = [
 		"#16a085",
@@ -43,11 +44,16 @@ const Card = ({ quotes }: Props) => {
 		"#77B1A9",
 		"#73A857",
 	];
-	const getRandomQuotes = () => {
-		const randomQuote = quotes[Math.floor(Math.random() * quotes.length)]; // get a quote by random
+
+	const getRandomQuotes = async (e: any) => {
+		// const randomQuote = quotes[Math.floor(Math.random() * quotes.length)]; // get a quote by random
+		e.preventDefault();
+		const res = await fetch("https://api.quotable.io/random");
+		const randomQuote = await res.json();
+		setNewQuotes(randomQuote);
+
 		const randomColor = colors[Math.floor(Math.random() * colors.length)]; // get a color by random
 		setColor(randomColor);
-		setNewQuotes(randomQuote);
 	};
 
 	return (

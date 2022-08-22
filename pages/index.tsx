@@ -5,14 +5,14 @@ import styles from "../styles/Home.module.css";
 
 type Props = {
 	quotes: {
-		text: string;
+		content: string;
 		author: string;
-	}[]; // array of object
+	}; // array of object
 };
 
 export async function getServerSideProps() {
 	// Fetch data from external API
-	const res = await fetch("https://type.fit/api/quotes");
+	const res = await fetch("https://api.quotable.io/random");
 	const quotes = await res.json();
 
 	// Pass data to the page via props
@@ -26,13 +26,12 @@ const Home = ({ quotes }: Props) => {
 				<title>Quotes Generator ❤ </title>
 				<meta name="description" content="Generate random quotes" />
 				<link rel="icon" href="/favicon.ico" />
-				
 			</Head>
 			<main className={styles.main}>
 				<Card quotes={quotes} />
 			</main>
 			<Footer />
-      {/* <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js" /> */}
+			{/* <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js" /> */}
 		</div>
 	);
 };
